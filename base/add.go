@@ -30,7 +30,7 @@ func Add(DatabaseID string, ApiKey string, Schema []model.Column) {
 		} else {
 			reader := bufio.NewReader(os.Stdin)
 
-			fmt.Println(col.Name + ": ")
+			fmt.Println(col.Name + "(" + col.Type + ")" + ": ")
 			input, _ := reader.ReadString('\n')
 
 			input = strings.TrimSpace(input)
