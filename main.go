@@ -33,6 +33,9 @@ func main() {
 	case "add":
 		cmd.Add()
 
+	case "delete":
+		cmd.Delete(os.Args[2:])
+
 	case "test":
 		cmd.Test()
 

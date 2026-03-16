@@ -3,7 +3,6 @@ package base
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -64,8 +63,6 @@ func Filter(option string, DatabaseID string, ApiKey string, Schema []model.Colu
 	for _, p := range rawPages {
 		pages = append(pages, p.(map[string]interface{}))
 	}
-
-	fmt.Println(condition)
 
 	return pages
 }
