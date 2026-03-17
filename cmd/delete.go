@@ -18,4 +18,8 @@ func Delete(text []string) {
 	schema := base.GetSchema(DatabaseID, ApiKey)
 
 	base.DeleteData(DatabaseID, ApiKey, schema, *keyword, *property)
+
+	pages := base.GetPages(DatabaseID, ApiKey)
+
+	base.RenderTable(schema, pages)
 }
