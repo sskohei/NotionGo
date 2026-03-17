@@ -17,7 +17,7 @@ func AddData(DatabaseID string, ApiKey string, Schema []model.Column) {
 	properties := map[string]interface{}{}
 
 	for _, col := range Schema {
-		if col.Type == "date" || col.Type == "formula" {
+		if col.Type == "formula" {
 			continue
 		}
 
@@ -28,7 +28,7 @@ func AddData(DatabaseID string, ApiKey string, Schema []model.Column) {
 			}
 			properties[col.Name] = designate(col, input)
 		} else if col.Type == "date" {
-			input := selectPrompt(col)
+			input := datePrompt(col)
 			if input == "" {
 				continue
 			}
@@ -140,6 +140,13 @@ func designate(m model.Column, word string) map[string]interface{} {
 			},
 		}
 
+	case "date":
+		return map[string]interface{}{
+			"date": map[string]interface{}{
+				"start": word,
+			},
+		}
+
 	default:
 		return nil
 	}
@@ -169,16 +176,37 @@ func selectPrompt(sel model.Column) string {
 }
 
 func datePrompt(sel model.Column) string {
-	fmt.Println(sel.Name + "を選択してください")
+	Date := [3]string{"year", "month", "day"}
+	date := ""
+
+	fmt.Println(sel.Name + "を入力してください")
 	reader := bufio.NewReader(os.Stdin)
 
-	for i := 0; i < 3; i++ {
-		if i == 0 {
-			fmt.Println("year:")
+	for _, word := range Date {
+		for {
+			fmt.Println(word + ":")
+
 			input, _ := reader.ReadString('\n')
 			input = strings.TrimSpace(input)
+			num, _ := strconv.Atoi(input)
+
+			if num > 0 && num < 10 {
+				input = "0" + input
+			}
+
+			index, err := strconv.Atoi(input)
+			if err != nil || index < 1 {
+				fmt.Println(word + "を入力してください")
+				continue
+			}
+			if word == "day" {
+				date = date + input
+			} else {
+				date = date + input + "-"
+			}
+			break
 		}
 	}
 
-	return ""
+	return date
 }
