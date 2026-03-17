@@ -25,7 +25,7 @@ func main() {
 		cmd.Contain(os.Args[2:])
 
 	case "properties":
-		cmd.Propaties()
+		cmd.Properties()
 
 	case "list":
 		cmd.List()

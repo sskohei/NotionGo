@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func Propaties() {
+func Properties() {
 	ApiKey := os.Getenv("NOTION_API_KEY")
 	DatabaseID := os.Getenv("DATA_SOURCE_ID")
 
