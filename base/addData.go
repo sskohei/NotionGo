@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-func Add(DatabaseID string, ApiKey string, Schema []model.Column) {
+func AddData(DatabaseID string, ApiKey string, Schema []model.Column) {
 	properties := map[string]interface{}{}
 
 	for _, col := range Schema {
@@ -21,7 +21,13 @@ func Add(DatabaseID string, ApiKey string, Schema []model.Column) {
 			continue
 		}
 
-		if col.Type == "select" || col.Type == "multi_select" {
+		if col.Type == "select" || col.Type == "multi_select" || col.Type == "status" {
+			input := selectPrompt(col)
+			if input == "" {
+				continue
+			}
+			properties[col.Name] = designate(col, input)
+		} else if col.Type == "date" {
 			input := selectPrompt(col)
 			if input == "" {
 				continue
@@ -160,4 +166,19 @@ func selectPrompt(sel model.Column) string {
 
 		return sel.Options[index-1]
 	}
+}
+
+func datePrompt(sel model.Column) string {
+	fmt.Println(sel.Name + "を選択してください")
+	reader := bufio.NewReader(os.Stdin)
+
+	for i := 0; i < 3; i++ {
+		if i == 0 {
+			fmt.Println("year:")
+			input, _ := reader.ReadString('\n')
+			input = strings.TrimSpace(input)
+		}
+	}
+
+	return ""
 }

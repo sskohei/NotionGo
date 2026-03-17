@@ -53,7 +53,6 @@ $env:NOTION_API_KEY="YOUR_NOTION_API_KEY"
 go run main.go <コマンド>
 ```
 
-
 ## コマンド一覧
 
 ### list
@@ -62,9 +61,30 @@ go run main.go list
 ```
 Notionデータベースを表として出力します。
 
-![list](image/list01.png "listサンプル")
+![list](images/list01.png "listサンプル")
 
 ### equal,contain
 ```
 go run main.go equal(contain) -k "検索したいキーワード" -p "検索したいプロパティ"
 ```
+使用例
+
+```
+go run main.go equal -k "2万人の新規ユーザーを獲得する" -p "目標名"
+```
+このコマンドを実行すると下記の画像のような表が出力されます。
+![equal](images/equal01.png "equalサンプル1")
+equalコマンドは指定したプロパティの中でキーワードに完全一致するものがあるか検索できます。
+
+```
+go run main.go contain -k "売上" -p "目標名"
+```
+このコマンドを実行すると下記の画像のような表が出力されます。
+![equal](images/contain01.png "equalサンプル")
+containコマンドは指定したプロパティの中でキーワードに部分一致するものがあるか検索できます。
+
+### add
+```
+go run main.go add
+```
+新しいデータを追加するコマンドです。

@@ -43,7 +43,7 @@ func GetSchema(DatabaseID string, ApiKey string) []model.Column {
 	for name, v := range props {
 		prop := v.(map[string]interface{})
 		colType := prop["type"].(string)
-		if colType == "select" || colType == "multi_select" {
+		if colType == "select" || colType == "multi_select" || colType == "status" {
 			selectInfo := prop[colType].(map[string]interface{})
 			options := selectInfo["options"].([]interface{})
 
