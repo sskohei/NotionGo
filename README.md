@@ -1,4 +1,4 @@
-# CLIでNotionのデータベースを操作する
+# NotionをCLIから操作するツール
 
 ## 目次
 * [About](#aboutはじめに)
@@ -13,7 +13,7 @@
 * [License](#license)
 
 ## About/はじめに
-このレポジトリはGoで作成したNotionのデータベースをCLIで操作するツールのレポジトリです。
+このレポジトリはGoで作成したNotionのデータベースをブラウザを介さずにCLIで操作するツールのレポジトリです。
 
 ## What is NotionGo?/NotionGoとは?
 NotionGoはすでに作成してあるNotionのデータベースのdata_source_idとNotionApiKeyを入力することによりNotionのデータベースを表として出力、データの追加などをすることができるツールになっています。ブラウザを使用することなくNotionのデータを操作できます。
@@ -113,7 +113,7 @@ select / multi_select / titleなどの各プロパティに対して処理を分
 * model : データ構造の定義
 
 ### 今後の拡張性
-* update（更新）昨日の追加
+* update（更新）機能の追加
 * 複数のデータベースの登録
 
 ## Commands/コマンド
